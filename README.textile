@@ -1,4 +1,4 @@
-h1 RESTful Adhearsion with .NET
+h1. RESTful Adhearsion with .NET
 
 <b>Submitted by David Laval</b>
 
@@ -6,7 +6,7 @@ Having developed lots of web applications, and web services in .Net, I needed to
 
 I read this article by @jsgoecke: <a href="http://jsgoecke.wordpress.com/2009/02/20/using-php-to-invoke-the-adhearsion-api-via-rest/">Using PHP to Invoke the Adhearsion API via REST</a>
 
-h2 The Example
+h2. The Example
 
 Created entries in extensions.conf and added the rpc code in the component I created:
 
