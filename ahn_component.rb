@@ -1,8 +1,8 @@
 def launch_call_rpc(vars)
   ahn_log.ami vars   
   
-  channel= vars["src"]
-  exten= vars["dest"]
+  channel = vars["src"]
+  exten = vars["dest"]
   options = { "Channel" => channel,
               "Context" =>  "callback",
               "Exten" =>    exten,
