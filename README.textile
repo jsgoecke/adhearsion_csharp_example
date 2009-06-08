@@ -1,0 +1,46 @@
+h1 RESTful Adhearsion with .NET
+
+<b>Submitted by David Laval</b>
+
+Having developed lots of web applications, and web services in .Net, I needed to “enrich” my applications by adding a communications piece. Also, I needed to leverage “all the work” done in .NET prior to my Ruby conversion(thanks to adhearsion). As I discorvered, the marriage of .Net and Adhearsion was lovely, thanks to the Restful RPC. Here is how I did it for a call back invoked via a classic console in .Net (this can be converted to a web application or web services easily).
+
+I read this article by @jsgoecke: <a href="http://jsgoecke.wordpress.com/2009/02/20/using-php-to-invoke-the-adhearsion-api-via-rest/">Using PHP to Invoke the Adhearsion API via REST</a>
+
+h2 The Example
+
+Created entries in extensions.conf and added the rpc code in the component I created:
+
+Here are entries for extensions.conf for the callback context.
+
+	- extensions.conf
+	
+Then I created a component within the adhearsion project call shout.rb:
+
+sudo ahn create component shout
+
+Then added the following code into the RPC section of the shout component:
+
+	- ahn_component.rb
+	
+Enable the restful_rpc  component:
+
+ahn  enable component restful_rpc
+
+Start your adhearsion project so it can receive “calls”.
+
+Note, you do not need entries in dialplan.rb, you will be calling the Adhearsion AMI interface directly through the lovely rpc cupid in your .NET project.
+
+Since JSON is required to post data to adhearsion rpc, you can download JSONSharp at:  <a href="http://code.google.com/p/jsonsharp/"> JSON Sharp</a> (Note this is for c#, alternatively you can find suitable open source JSON at  <a href="http://json.org/">JSON.org</a>)
+
+These steps involves C# implmentation details, there are many ways to do this I would imagine…better way too.
+Created a class file within you project say adhearsion.cs, that will have Adhearsion related data - this will also be an input for JSONSharp for encoding. You can have different classes in this file such as options (for originate, just like the php example) files etc. Here is the content:
+
+	- csharp_example1.cs
+
+In my own case I only used the ahnparams class, as I have the originate interface almost completed in the RPC in shout.rb.
+
+This application is actually a console application as a prove of concept, you can have it as a web application or web services – an easy conversion in .net. Here is the actual code that finishes this exercise:
+
+	- csharp_example2.cs
+	
+It worked great! And it is nice to know that Adhearsion can be “exposed” in .Net easily. I think the RPC interface should have the JSON parameter as optional, as it is possible to just call an rpc method in adhearsion that does not need any parameter. Now, I can easily integrate my .Net code that existed prior to Adhearsion with no sweat.
